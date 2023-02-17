@@ -1,0 +1,28 @@
+-- Create a video game store database.
+
+CREATE TABLE gameshop (id INTEGER PRIMARY KEY, name TEXT,price INTEGER, console TEXT, release_year INTEGER, genere TEXT);
+
+INSERT INTO gameshop VALUES (1, "Naruto Ultimate Ninja 4", 30, "PlayStation", 2016, "action-adventure");
+INSERT INTO gameshop VALUES (2,"Dragon-Ball Z: Z-Fighters",40, "X-box", 2019, "action");
+INSERT INTO gameshop VALUES (3," The Last of Us",60, "Play-Station",2014,"adventure");
+INSERT INTO gameshop VALUES (4,"All-Stars",30,"Play-Station", 2010,"fighting");
+INSERT INTO gameshop VALUES (5,"Uncharted", 50, "Play-Station",2017,"adventure");
+INSERT INTO gameshop VALUES (6,"Call of Duty: Ghost", 45, "X-box", 2014,"shooting");
+INSERT INTO gameshop VALUES (7, "Call of Duty: Black ops 1", 30, "Play-Station", 2015, "shooting");
+INSERT INTO gameshop VALUES (8, "Call of Duty: Black ops 2",40, " Play-Station", 2017, "shooting");
+INSERT INTO gameshop VALUES (9, "Call of Duty: Black ops 3", 50, "Play-Station", 2019, "shooting");
+INSERT INTO gameshop VALUES (10, "God of War: Ragnorok", 60, "Play-Station", 2022, "action-adventure");
+INSERT INTO gameshop VALUES (11, "Crash Bandicot", 10,"Play-Station",2001,"adventure");
+INSERT INTO gameshop VALUES(12, "Resident-Evil",50, "X-box", 2020, "adventure");
+INSERT INTO gameshop VALUES (13,"Need for Speed",25,'Play-Station',2005, "racing");
+INSERT INTO gameshop VALUES (14, "Mario-Kart",45,"Nintendo-Switch",2020,"racing");
+INSERT INTO gameshop VALUES (15, "Devil May Cry",60, "X-box",2019,"action-adventure");
+
+--Display the database orderd by price.
+SELECT * FROM gameshop ORDER BY price;
+
+--What is the overall total price of video games in the store?
+SELECT SUM(price)" overall total price of video games" FROM gameshop;
+
+--What is the average price of video games?
+SELECT AVG(price) FROM "average price of video games" gameshop;
