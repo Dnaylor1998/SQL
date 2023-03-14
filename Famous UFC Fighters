@@ -1,0 +1,51 @@
+-- Create a famous persons database.
+
+CREATE TABLE Famous_UFC_Fighters (id INTEGER PRIMARY KEY AUTOINCREMENT, Full_Name TEXT,Nickname TEXT,Residence TEXT,Nationality TEXT, Team TEXT, Trainer TEXT, Weight_Division TEXT,Weight_lbs INTEGER,Reach_inches INTEGER,Years_Active INTEGER,Age INTEGER, Opponent_id INTEGER) ;
+
+INSERT INTO Famous_UFC_Fighters VALUES (1,'Israel Adesanya','The Last Style Bender',"Auckland,New Zeland" ,'New Zealander','City Kickboxing', 'Eugene Bareman','Middle Weight', 185,80,13,33,5);
+INSERT INTO Famous_UFC_Fighters VALUES (2,'Jon Jones','Bones',"Rochester,New York",'American','Fight Ready','Greg Jackson','Heavy Weight',250,84.5,15,35,NULL);
+INSERT INTO Famous_UFC_Fighters VALUES (3,'Conor McGregor', 'Notorious',"Dublin,Ireland", 'Irish','SBG Ireland','John Kavanagh','Welter Weight',156,74,15,34,4);
+INSERT INTO Famous_UFC_Fighters VALUES (4,'Khabib Nurmagomedov','The Eagle',"Makhachkala, Dagestan",'Russian','American Kickboxing Academy','Javier Mendez','Light Weight',155,70,12,34,3);
+INSERT INTO Famous_UFC_Fighters VALUES (5,'Anderson Silva','The Spider',"Los Angeles,California",'Brazilian American','Chute Boxe Academy','Ed Soares','Middle Weight',185,77.5,23,47,1);
+
+
+CREATE TABLE MMA_Record (id INTEGER PRIMARY KEY AUTOINCREMENT,Record_id INTEGER, Wins INTEGER,Losses INTEGER, No_Contest INTEGER);
+
+INSERT INTO MMA_Record VALUES (1,1,23,2,NULL);
+INSERT INTO MMA_Record VALUES (2,2,27,1,1);
+INSERT INTO MMA_Record VALUES (3,3,22,6,NULL);
+INSERT INTO MMA_Record VALUES (4,4,29,0,NULL);
+INSERT INTO MMA_Record VALUES (5,5,34,11,1);
+
+
+CREATE TABLE Material_Wealth (id INTEGER PRIMARY KEY AUTOINCREMENT, Fighter_id INTEGER,net_worth TEXT, Sponsors TEXT);
+
+INSERT INTO Material_Wealth VALUES (1,1,"6,000,000","Puma,Engage");
+INSERT INTO Material_Wealth VALUES(2,2,"10,000,000"," Reebok, Nike, GAT Supplements, Monster Energy, and Gatorade");
+INSERT INTO Material_Wealth VALUES (3,3,"200,000,000","EA (Electronic Arts) , Reebok, Wynn Resorts, Beats By Dre, Monster Energy, Burger King, TIDL Sport, and McGregor F.A.S.T.");
+INSERT INTO Material_Wealth VALUES (4,4,"40,000,000","Gorilla Energy, Reebok, Toyota, SalamPay");
+INSERT INTO Material_Wealth VALUES (5,5,"8,000,000","Burger King, Reebok and Nike, and the Brazilian football club Corinthians.");
+
+-- What is the MMA Record of each fighter along with their sponsors?
+SELECT Famous_UFC_Fighters.Full_Name,MMA_Record.Wins,MMA_Record.Losses,MMA_Record.Wins+MMA_Record.Losses AS Total_Fights, MMA_Record.No_Contest, Material_Wealth.net_worth 
+FROM Famous_UFC_Fighters JOIN MMA_Record  
+ON Famous_UFC_Fighters.id=MMA_Record.Record_id 
+JOIN Material_Wealth 
+ON Famous_UFC_Fighters.id=Material_Wealth.Fighter_id 
+ORDER BY No_Contest DESC;
+
+
+--Which fighters within this data set have fought?
+SELECT a.Full_Name as Past_Opponents, b.Full_Name as Past_Opponents
+FROM Famous_UFC_Fighters a JOIN Famous_UFC_Fighters b
+ON a.id=b.Opponent_id;
+
+--Which fighters within this data set have not fought?
+SELECT a.Full_Name as Past_Opponents, b.Full_Name as Past_Opponents
+FROM Famous_UFC_Fighters a LEFT JOIN Famous_UFC_Fighters b
+ON a.id=b.Opponent_id;
+
+
+
+
+
