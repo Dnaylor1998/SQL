@@ -26,6 +26,7 @@ ON a.show_id=b.show_id
 WHERE a.title='Bright Star';
 
 #5What is the oldest movie in the database and what year was it made?
+
 SELECT a.type,a.title,a.release_year
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" a
 WHERE a.type='Movie'
