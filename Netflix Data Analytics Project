@@ -2,13 +2,13 @@
 
 #1How many movie titles are there in the database? (movies only, not tv shows)
 
-SELECT Count(a.type)
+SELECT COUNT(a.type)
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" a 
 WHERE a.type='Movie';
 
 #2When was the most recent batch of tv shows and/or movies added to the database?
 
-SELECT max(b.date_added)
+SELECT MAX(b.date_added)
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" b;
 
 #3List all the movies and tv shows in alphabetical order.
