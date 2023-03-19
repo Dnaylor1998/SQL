@@ -1,4 +1,4 @@
-#In this SQL code, I'm querying a database that's holding Nexflix data to answer questions about the data. 
+# Using SQL, I'm conducting a query on a database that contains information about Netflix in order to obtain insights and answers to specific questions.
 
 #1How many movie titles are there in the database? (movies only, not tv shows)
 
