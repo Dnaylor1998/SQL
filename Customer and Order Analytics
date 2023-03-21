@@ -1,0 +1,58 @@
+#I am using SQL to extract statistical information about customer and order data from a database containing several tables.
+
+#1. How many orders were placed in January?
+
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE length(orderID)=6
+AND orderID <>'Order ID';
+
+#2.How many of those orders were for an iPhone?
+
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE length(orderID)=6
+AND orderID <>'Order ID'
+AND Product='iPhone';
+
+#3. Select the customer account numbers for all the orders that were placed in February.
+SELECT  distinct customers.acctnum 
+FROM BIT_DB.FebSales 
+INNER JOIN BIT_DB.customers
+ON FebSales.orderID= customers.order_id
+WHERE length(orderID)=6
+AND orderID <>'Order ID'
+AND orderID <>'';
+
+#4. Which product was the cheapest one sold in January, and what was the price?
+
+SELECT JanSales.product,JanSales.price AS CheapestProduct
+FROM BIT_DB.JanSales
+order by price asc
+LIMIT 1;
+
+#5. What is the total revenue for each product in January?
+
+SELECT JanSales.Product,SUM(JanSales.Quantity)*Price as Total_Revenue
+FROM BIT_DB.JanSales
+GROUP BY Product
+HAVING orderID <> 'Order ID' 
+AND orderID <>'';
+
+
+#6 Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+SELECT FebSales.Product,FebSales.location,FebSales.Quantity,FebSales.price,SUM( FebSales.Quantity*FebSales.Price) AS Total_Revenue
+FROM BIT_DB.FebSales
+WHERE orderID <>'Order ID'
+AND orderID <>''
+AND location='548 Lincoln St, Seattle, WA 98101'
+GROUP BY Product;
+
+#7 How many customers ordered more than 2 products at a time, and what was the average amount spent for those customers?
+SELECT COUNT(customers.acctnum),AVG(FebSales.Quantity*FebSales.price)
+FROM BIT_DB.customers
+LEFT JOIN BIT_DB.FebSales
+ON customers.order_id=FebSales.orderID
+WHERE FebSales.Quantity > 2
+AND orderID <> 'Order ID'
+AND orderID <> '';
