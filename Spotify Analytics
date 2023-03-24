@@ -56,3 +56,19 @@ FROM BIT_DB.Spotifydata
 union
 SELECT DISTINCT track_name,MIN(valence) 
 FROM BIT_DB.Spotifydata;
+
+#5 Calculate the average popularity for the artists in the Spotify data table. 
+Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”
+
+WITH tempTable as(
+SELECT s.artist_name, AVG(s.popularity)as avg_rating,
+CASE
+    WHEN AVG(s.popularity) >=90 THEN 'Top Star'
+END as Status
+FROM Spotifydata s
+GROUP BY artist_name)
+
+SELECT artist_name,avg_rating, Status
+FROM tempTable
+WHERE Status ='Top Star'
+ORDER BY avg_rating desc;
